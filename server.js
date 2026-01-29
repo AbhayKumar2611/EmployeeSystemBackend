@@ -6,7 +6,14 @@ const employeeRouter = require('./routes/employees.router')
 
 const app = express()
 app.use(express.json())
-app.use(cors())
+
+// CORS configuration - allow requests from frontend
+const corsOptions = {
+    origin: process.env.FRONTEND_URL || 'https://employee-system-frontend.vercel.app',
+    credentials: true,
+    optionsSuccessStatus: 200
+}
+app.use(cors(corsOptions))
 
 // Connection To DB
 connectToDB()
